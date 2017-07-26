@@ -25,5 +25,7 @@ export default {
     extensions: ['*', '.js']
   },
 
+  devtool: '#inline-source-map',
+
   plugins: []
 }
