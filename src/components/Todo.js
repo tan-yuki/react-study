@@ -33,11 +33,35 @@ export class Todo extends React.Component {
     });
   }
 
+  onSubmitAddingInput(e) {
+    e.preventDefault();
+
+    const maxId = prevState.todos.reduce((max, v) => Math.max(max, v.id), 0);
+
+    this.setState({
+      todos: [...this.state.todos, {
+        id: maxId + 1,
+        title: this.inputTextInAddingForm,
+        done: false,
+      }],
+    });
+  }
+
+  onChangeAddingInput(e) {
+    this.inputTextInAddingForm = e.target.value;
+  }
+
   render () {
     const items = this.state.todos.map((todo) => {
       return <li key={todo.id}>{todo.title}</li>;
     });
 
-    return <ul>{items}</ul>;
+    return (<div>
+      <form onSubmit={(e) => this.onSubmitAddingInput(e)}>
+        <input type="text" onChange={(e) => this.onChangeAddingInput(e)} />
+        <input type="submit" value="Add" />
+      </form>
+      <ul>{items}</ul>
+    </div>);
   }
 }
