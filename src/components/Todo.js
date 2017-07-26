@@ -1,5 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
+import {TodoAddForm} from './TodoAddForm';
 
 export class Todo extends React.Component {
 
@@ -7,7 +8,6 @@ export class Todo extends React.Component {
     super(props);
 
     this.state = {
-      inputText: "",
       todos: [],
     };
   }
@@ -34,22 +34,16 @@ export class Todo extends React.Component {
     });
   }
 
-  onSubmitAddingInput(e) {
-    e.preventDefault();
+  addTodo(title) {
+    const maxId = this.state.todos.reduce((max, v) => Math.max(max, v.id), 0);
+    const newTodo = {
+      id: maxId + 1,
+      title: title,
+      done: false,
+    };
 
-
-    this.setState((prevState, props) => {
-      const maxId = prevState.todos.reduce((max, v) => Math.max(max, v.id), 0);
-      const newTodo = {
-        id: maxId + 1,
-        title: prevState.inputText,
-        done: false,
-      };
-
-      return {
-        inputText: "",
-        todos: [...this.state.todos, newTodo],
-      };
+    this.setState({
+      todos: [...this.state.todos, newTodo],
     });
   }
 
@@ -65,13 +59,7 @@ export class Todo extends React.Component {
     });
 
     return (<div>
-      <form onSubmit={(e) => this.onSubmitAddingInput(e)}>
-        <input type="text"
-               onChange={(e) => this.onChangeAddingInput(e)}
-               value={this.state.inputText}
-        />
-        <input type="submit" value="Add" />
-      </form>
+      <TodoAddForm addTodo={(title) => this.addTodo(title)} />
       <ul>{items}</ul>
     </div>);
   }
