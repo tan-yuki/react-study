@@ -48,6 +48,14 @@ export class Todo extends React.Component {
     });
   }
 
+  deleteTodo(id) {
+    const newTodos = this.state.todos.filter((todo) => todo.id !== id);
+
+    this.setState({
+      todos: newTodos,
+    });
+  }
+
   onChangeAddingInput(e) {
     this.setState({
       inputText: e.target.value,
@@ -58,7 +66,8 @@ export class Todo extends React.Component {
     const items = this.state.todos.map((todo) => {
       return <TodoItem key={todo.id}
                        id={todo.id}
-                       title={todo.title} />
+                       title={todo.title}
+                       deleteTodo={(id) => this.deleteTodo(id)} />
     });
 
     return (<div>
