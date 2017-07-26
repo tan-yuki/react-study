@@ -80,7 +80,6 @@ export class Todo extends React.Component {
     const items = this.state.todos.map((todo) => {
       return <TodoItem key={todo.id}
                        id={todo.id}
-                       title={todo.title}
                        markAsDone={todo.done}
                        updateTodo={(id, title) => this.updateTodo(id, title)}
                        deleteTodo={(id) => this.deleteTodo(id)} />
