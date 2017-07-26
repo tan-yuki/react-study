@@ -1,6 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import cn from 'classnames';
+import PropTypes from 'prop-types';
 
 export class TodoItem extends React.Component {
 
@@ -79,3 +80,11 @@ export class TodoItem extends React.Component {
     </li>);
   }
 }
+
+TodoItem.propTypes = {
+  id:         PropTypes.number.isRequired,
+  title:      PropTypes.string.isRequired,
+  markAsDone: PropTypes.bool.isRequired,
+  updateTodo: PropTypes.func.isRequired,
+  deleteTodo: PropTypes.func.isRequired,
+};

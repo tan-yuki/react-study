@@ -1,5 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
+import PropTypes from 'prop-types';
 
 export class TodoAddForm extends React.Component {
 
@@ -36,3 +37,7 @@ export class TodoAddForm extends React.Component {
     </form>);
   }
 }
+
+TodoAddForm.propTypes = {
+  addTodo: PropTypes.func.isRequired,
+};
