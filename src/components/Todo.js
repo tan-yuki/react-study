@@ -7,6 +7,7 @@ export class Todo extends React.Component {
     super(props);
 
     this.state = {
+      inputText: "",
       todos: [],
     };
   }
@@ -36,19 +37,26 @@ export class Todo extends React.Component {
   onSubmitAddingInput(e) {
     e.preventDefault();
 
-    const maxId = prevState.todos.reduce((max, v) => Math.max(max, v.id), 0);
 
-    this.setState({
-      todos: [...this.state.todos, {
+    this.setState((prevState, props) => {
+      const maxId = prevState.todos.reduce((max, v) => Math.max(max, v.id), 0);
+      const newTodo = {
         id: maxId + 1,
-        title: this.inputTextInAddingForm,
+        title: prevState.inputText,
         done: false,
-      }],
+      };
+
+      return {
+        inputText: "",
+        todos: [...this.state.todos, newTodo],
+      };
     });
   }
 
   onChangeAddingInput(e) {
-    this.inputTextInAddingForm = e.target.value;
+    this.setState({
+      inputText: e.target.value,
+    });
   }
 
   render () {
@@ -58,7 +66,10 @@ export class Todo extends React.Component {
 
     return (<div>
       <form onSubmit={(e) => this.onSubmitAddingInput(e)}>
-        <input type="text" onChange={(e) => this.onChangeAddingInput(e)} />
+        <input type="text"
+               onChange={(e) => this.onChangeAddingInput(e)}
+               value={this.state.inputText}
+        />
         <input type="submit" value="Add" />
       </form>
       <ul>{items}</ul>
