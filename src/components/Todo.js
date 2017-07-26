@@ -1,6 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {TodoAddForm} from './TodoAddForm';
+import {TodoItem} from './TodoItem';
 
 export class Todo extends React.Component {
 
@@ -53,9 +54,11 @@ export class Todo extends React.Component {
     });
   }
 
-  render () {
+  render() {
     const items = this.state.todos.map((todo) => {
-      return <li key={todo.id}>{todo.title}</li>;
+      return <TodoItem key={todo.id}
+                       id={todo.id}
+                       title={todo.title} />
     });
 
     return (<div>

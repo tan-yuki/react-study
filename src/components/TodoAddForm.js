@@ -26,7 +26,7 @@ export class TodoAddForm extends React.Component {
     });
   }
 
-  render () {
+  render() {
     return (<form onSubmit={(e) => this.onSubmitAddingInput(e)}>
       <input type="text"
              onChange={(e) => this.onChangeAddingInput(e)}
