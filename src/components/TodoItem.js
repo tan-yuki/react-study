@@ -1,5 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
+import cn from 'classnames';
 
 export class TodoItem extends React.Component {
 
@@ -8,7 +9,7 @@ export class TodoItem extends React.Component {
 
     this.state = {
       updatingText: this.props.title,
-      isEditing: false
+      isEditing: false,
     };
   }
 
@@ -35,10 +36,18 @@ export class TodoItem extends React.Component {
       return;
     }
 
-    this.props.updateTodo(this.props.id, this.state.updatingText);
+    this.props.updateTodo(this.props.id, {
+      title: this.state.updatingText,
+    });
 
     this.setState({
       isEditing: false
+    });
+  }
+
+  onChangeCheckbox(e) {
+    this.props.updateTodo(this.props.id, {
+      done: !this.props.markAsDone,
     });
   }
 
@@ -57,7 +66,14 @@ export class TodoItem extends React.Component {
       </span>);
     })();
 
-    return (<li key={this.props.id}>
+    const className = cn({
+      checked: this.props.markAsDone
+    });
+
+    return (<li className={className}>
+      <input type="checkbox"
+             onChange={(e) => this.onChangeCheckbox(e)}
+             checked={this.props.markAsDone} />
       {todoContents}
       <a href="#" onClick={(e) => this.onClickDeleteLink(e)}>削除</a>
     </li>);

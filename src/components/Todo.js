@@ -56,13 +56,13 @@ export class Todo extends React.Component {
     });
   }
 
-  updateTodo(id, title) {
+  updateTodo(id, attrs) {
     const newTodos = this.state.todos.map((todo) => {
       if (todo.id !== id) {
         return todo;
       }
 
-      return Object.assign({}, todo, {title: title});
+      return Object.assign({}, todo, attrs);
     });
 
     this.setState({
@@ -81,6 +81,7 @@ export class Todo extends React.Component {
       return <TodoItem key={todo.id}
                        id={todo.id}
                        title={todo.title}
+                       markAsDone={todo.done}
                        updateTodo={(id, title) => this.updateTodo(id, title)}
                        deleteTodo={(id) => this.deleteTodo(id)} />
     });
