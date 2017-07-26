@@ -8,6 +8,10 @@ export class Clock extends React.Component {
     this.state = {
       date: new Date(),
     };
+
+    setInterval(() => {
+      this.setState({date: new Date()});
+    }, 1000);
   }
 
   render () {
