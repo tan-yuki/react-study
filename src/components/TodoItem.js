@@ -14,10 +14,28 @@ export class TodoItem extends React.Component {
     };
   }
 
+  deleteTodo(id) {
+    setTimeout(() => {
+      this.props.deleteTodo(id);
+    }, 300);
+  }
+
+  updateTodo(id, newTitle) {
+    setTimeout(() => {
+      this.props.updateTodo(id, {
+        title: newTitle
+      });
+
+      this.setState({
+        isEditing: false
+      });
+    }, 300);
+  }
+
   onClickDeleteLink(e) {
     e.preventDefault();
 
-    this.props.deleteTodo(this.props.id);
+    this.deleteTodo(this.props.id);
   }
 
   onDoubleClickText(e) {
@@ -37,13 +55,7 @@ export class TodoItem extends React.Component {
       return;
     }
 
-    this.props.updateTodo(this.props.id, {
-      title: this.state.updatingText,
-    });
-
-    this.setState({
-      isEditing: false
-    });
+    this.updateTodo(this.props.id, this.state.updatingText);
   }
 
   onChangeCheckbox(e) {

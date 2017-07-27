@@ -12,13 +12,19 @@ export class TodoAddForm extends React.Component {
     };
   }
 
+  addTodo(newTitle) {
+    setTimeout(() => {
+      this.props.addTodo(newTitle);
+      this.setState({
+        inputText: "",
+      });
+    }, 300);
+  }
+
   onSubmitAddingInput(e) {
     e.preventDefault();
 
-    this.props.addTodo(this.state.inputText);
-    this.setState({
-      inputText: "",
-    });
+    this.addTodo(this.state.inputText);
   }
 
   onChangeAddingInput(e) {
