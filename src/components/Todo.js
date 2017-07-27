@@ -14,25 +14,27 @@ export class Todo extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      todos: [
-        {
-          id: 1,
-          title: "牛乳買う",
-          done: false
-        },
-        {
-          id: 2,
-          title: "醤油買う",
-          done: false
-        },
-        {
-          id: 3,
-          title: "スプラトゥーン2買う",
-          done: false
-        },
-      ]
-    });
+    setTimeout(() => {
+      this.setState({
+        todos: [
+          {
+            id: 1,
+            title: "牛乳買う",
+            done: false
+          },
+          {
+            id: 2,
+            title: "醤油買う",
+            done: false
+          },
+          {
+            id: 3,
+            title: "スプラトゥーン2買う",
+            done: false
+          },
+        ]
+      });
+    }, 300);
   }
 
   addTodo(title) {
